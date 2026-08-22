@@ -136,7 +136,7 @@ try {
             else {
                 Write-Note "Installing Visual Studio 2026 Community with the C++ workload"
                 try {
-                    Install-Winget "Microsoft.VisualStudio.2026.Community" @("--override", "--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended")
+                    Install-Winget "Microsoft.VisualStudio.2022.Community" @("--override", "--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended")
                 }
                 catch {
                     throw "Visual Studio could not be installed automatically. Install 'Visual Studio 2026 Community' with the 'Desktop development with C++' workload from https://visualstudio.microsoft.com/downloads/ and re-run."
