@@ -134,7 +134,7 @@ try {
                 & $setup modify --installPath "$vsPath" --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --quiet --norestart --wait
             }
             else {
-                Write-Note "Installing Visual Studio 2026 Community with the C++ workload"
+                Write-Note "Installing Visual Studio 2022 Community with the C++ workload"
                 try {
                     Install-Winget "Microsoft.VisualStudio.2022.Community" @("--override", "--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended")
                 }
