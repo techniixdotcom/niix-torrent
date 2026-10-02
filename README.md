@@ -1,6 +1,6 @@
 # NiiX Torrent
 
-**Version 1.0 — maintained by techniix.**
+**Version 1.0 — maintained by: cuteLiLi / techniix / QuacK.**
 
 A fast, lightweight, dark-themed BitTorrent client for Windows, built in modern
 C++ on top of Rasterbar-libtorrent.
