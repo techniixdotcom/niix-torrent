@@ -40,7 +40,7 @@
     "about_niixtorrent": "NiiX Torrent névjegy",
     "build_info_format": "Info: {0}\nSHA1: {1}",
     "niixtorrent_description": "Szeretettel készült. Boost, Rasterbar-libtorrent, és OpenSSL segítségével.",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent a GitHub-on</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent a GitHub-on</a>",
     "downloads": "Letöltés",
     "transfers": "Átvitel",
     "path": "Hely",

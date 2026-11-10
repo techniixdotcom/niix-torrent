@@ -1,0 +1,32 @@
+#pragma once
+
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+#include <wx/wx.h>
+#endif
+
+#include <memory>
+#include <string>
+
+wxDECLARE_EVENT(ptEVT_FILTER_CHANGED, wxCommandEvent);
+
+namespace pt::UI::Models { class TorrentListModel; }
+
+namespace pt::UI
+{
+    // The filter bar above the torrent list. Takes a PQL expression
+    // (see docs/src/pql.rst) and applies it to the list model on Enter.
+    class Console : public wxPanel
+    {
+    public:
+        Console(wxWindow* parent, wxWindowID id, Models::TorrentListModel* model);
+
+        void SetText(std::string const& text);
+
+    private:
+        void CreateFilter(std::string const& filter);
+
+        wxTextCtrl* m_input;
+        Models::TorrentListModel* m_model;
+    };
+}

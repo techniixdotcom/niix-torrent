@@ -43,7 +43,7 @@
     "about_niixtorrent": "Om NiiX Torrent",
     "niixtorrent_v_format": "NiiX Torrent v{0}",
     "niixtorrent_description": "Byggt med kärlek, ovanpå Boost, Rasterbar-libtorrent och OpenSSL.",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent på GitHub</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent på GitHub</a>",
     "downloads": "Nedladdningar",
     "transfers": "Överföringar",
     "path": "Sökväg",

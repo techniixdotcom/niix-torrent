@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+jobs:
+  windows:
+    name: Windows (x64)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Cache vcpkg packages
+        uses: actions/cache@v6
+        with:
+          path: ~\AppData\Local\vcpkg\archives
+          key: vcpkg-x64-${{ hashFiles('vcpkg.json', 'scripts/bootstrap.ps1') }}
+
+      - name: Build application, installer and portable zip
+        shell: pwsh
+        run: .\build.ps1 -Target Installer -Platform x64
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: NiiXTorrent-windows-x64
+          path: |
+            dist/*.exe
+          if-no-files-found: error
+
+  flatpak:
+    name: Linux (Flatpak)
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-26.08
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: NiiXTorrent.flatpak
+          manifest-path: packaging/flatpak/io.github.niixtorrent.NiiXTorrent.yml
+          cache-key: flatpak-builder-${{ hashFiles('packaging/flatpak/*.yml') }}

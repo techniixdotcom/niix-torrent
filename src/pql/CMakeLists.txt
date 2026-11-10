@@ -1,80 +1,55 @@
-include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
+# PQL - the NiiX Torrent query language (ANTLR4 grammar in Query.g4).
+#
+# The parser in generated/ was produced with ANTLR 4.13.2 and must be built
+# against the matching runtime. The runtime is taken from vendor/antlr4 when
+# that checkout exists (scripts/bootstrap.*), otherwise from an installed
+# antlr4-runtime package.
 
-set(THIRDPARTY_DIR ${CMAKE_BINARY_DIR}/runtime/thirdparty)
-set(UTFCPP_DIR ${THIRDPARTY_DIR}/utfcpp)
-ExternalProject_Add(
-  utfcpp
-  GIT_REPOSITORY        "https://github.com/nemtrif/utfcpp.git"
-  GIT_TAG               "v4.0.9"
-  SOURCE_DIR            ${UTFCPP_DIR}
-  UPDATE_DISCONNECTED   1
-  CMAKE_ARGS            -DCMAKE_INSTALL_PREFIX=${UTFCPP_DIR}/install -Dgtest_force_shared_crt=ON
-  TEST_AFTER_INSTALL    1
-  STEP_TARGETS          build)
+set(NIIX_ANTLR4_DIR "${CMAKE_SOURCE_DIR}/vendor/antlr4" CACHE PATH "ANTLR4 source checkout")
+set(_antlr_runtime "${NIIX_ANTLR4_DIR}/runtime/Cpp/runtime/src")
 
-set(ANTLR4_SOURCE_DIR "../../vendor/antlr4/runtime/Cpp")
+if(EXISTS "${_antlr_runtime}/antlr4-runtime.h")
+    file(GLOB_RECURSE _antlr_sources CONFIGURE_DEPENDS "${_antlr_runtime}/*.cpp")
 
-file(GLOB_RECURSE libantlrcpp_SRC
-  "${ANTLR4_SOURCE_DIR}/runtime/src/*.cpp"
-)
+    add_library(niix_antlr4 STATIC ${_antlr_sources})
+    target_compile_definitions(niix_antlr4 PUBLIC ANTLR4CPP_STATIC)
+    target_include_directories(niix_antlr4 PUBLIC "${_antlr_runtime}")
+    target_compile_features(niix_antlr4 PUBLIC cxx_std_17)
+    if(MSVC)
+        target_compile_options(niix_antlr4 PRIVATE /W0)
+    else()
+        target_compile_options(niix_antlr4 PRIVATE -w)
+        find_package(Threads REQUIRED)
+        target_link_libraries(niix_antlr4 PUBLIC Threads::Threads)
+    endif()
+    set(_antlr_target niix_antlr4)
+    message(STATUS "NiiX: using vendored ANTLR4 runtime (${NIIX_ANTLR4_DIR})")
+else()
+    find_package(antlr4-runtime 4.13.2 CONFIG REQUIRED)
+    if(TARGET antlr4_static)
+        set(_antlr_target antlr4_static)
+    else()
+        set(_antlr_target antlr4_shared)
+    endif()
+    message(STATUS "NiiX: using installed ANTLR4 runtime ${antlr4-runtime_VERSION}")
+endif()
 
-add_library(
-    antlr4
-    STATIC
-    ${libantlrcpp_SRC})
+add_library(NiiXTorrentPQL STATIC
+    generated/QueryBaseVisitor.cpp
+    generated/QueryLexer.cpp
+    generated/QueryParser.cpp
+    generated/QueryVisitor.cpp)
 
-target_compile_definitions(
-    antlr4
-    PRIVATE
-    -D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
-    -DANTLR4CPP_STATIC
-)
+target_include_directories(NiiXTorrentPQL INTERFACE generated)
+target_link_libraries(NiiXTorrentPQL PUBLIC ${_antlr_target})
 
-target_compile_definitions(
-    antlr4
-    INTERFACE
-    -D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
-    -DANTLR4CPP_STATIC
-)
+if(TARGET antlr4_static OR TARGET antlr4_shared)
+    # Installed runtimes put their headers in <prefix>/include/antlr4-runtime.
+    if(ANTLR4_INCLUDE_DIR)
+        target_include_directories(NiiXTorrentPQL PUBLIC "${ANTLR4_INCLUDE_DIR}")
+    endif()
+endif()
 
-target_include_directories(
-    antlr4
-    PRIVATE
-    ${ANTLR4_SOURCE_DIR}/runtime/src
-    ${ANTLR4_SOURCE_DIR}/runtime/src/atn
-    ${ANTLR4_SOURCE_DIR}/runtime/src/dfa
-    ${ANTLR4_SOURCE_DIR}/runtime/src/misc
-    ${ANTLR4_SOURCE_DIR}/runtime/src/support
-    ${ANTLR4_SOURCE_DIR}/runtime/src/tree
-    ${ANTLR4_SOURCE_DIR}/runtime/src/tree/pattern
-    ${ANTLR4_SOURCE_DIR}/runtime/src/tree/xpath
-    ${UTFCPP_DIR}/install/include/utf8cpp
-    ${UTFCPP_DIR}/install/include/utf8cpp/utf8
-)
-
-add_library(
-    NiiXTorrentPQL
-    STATIC
-    generated/QueryBaseVisitor
-    generated/QueryLexer
-    generated/QueryParser
-    generated/QueryVisitor
-)
-
-target_include_directories(
-    NiiXTorrentPQL
-    PUBLIC
-    "../../vendor/antlr4/runtime/Cpp/runtime/src"
-)
-
-target_include_directories(
-    NiiXTorrentPQL
-    INTERFACE
-    generated/
-)
-
-target_link_libraries(
-    NiiXTorrentPQL
-    PUBLIC
-    antlr4
-)
+if(NOT MSVC)
+    target_compile_options(NiiXTorrentPQL PRIVATE -w)
+endif()

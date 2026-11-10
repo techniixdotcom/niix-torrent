@@ -1,0 +1,28 @@
+#include "buildinfo.hpp"
+
+using pt::BuildInfo;
+
+const char* BuildInfo::branch()
+{
+    return "@NIIX_GIT_BRANCH@";
+}
+
+const char* BuildInfo::commitish()
+{
+    return "@NIIX_GIT_SHA@";
+}
+
+const char* BuildInfo::crashpadUrl()
+{
+    return "@NIIX_CRASHPAD_URL@";
+}
+
+const char* BuildInfo::semver()
+{
+    return "@NIIX_VERSION@";
+}
+
+const char* BuildInfo::version()
+{
+    return "@NIIX_VERSION@";
+}

@@ -1,0 +1,23 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=NiiX Torrent
+GenericName=BitTorrent Client
+GenericName[de]=BitTorrent-Client
+GenericName[fr]=Client BitTorrent
+GenericName[es]=Cliente BitTorrent
+GenericName[it]=Client BitTorrent
+Comment=Download and share files over BitTorrent
+Comment[de]=Dateien über BitTorrent herunterladen und teilen
+Comment[fr]=Télécharger et partager des fichiers via BitTorrent
+Comment[es]=Descargar y compartir archivos mediante BitTorrent
+Comment[it]=Scarica e condividi file tramite BitTorrent
+Exec=niixtorrent %U
+Icon=io.github.niixtorrent.NiiXTorrent
+Terminal=false
+Categories=Network;FileTransfer;P2P;GTK;
+Keywords=torrent;bittorrent;magnet;download;p2p;
+MimeType=application/x-bittorrent;x-scheme-handler/magnet;
+StartupNotify=true
+StartupWMClass=io.github.niixtorrent.NiiXTorrent
+SingleMainWindow=true

@@ -218,9 +218,9 @@
     "niixtorrent_description": "נבנה באהבה, בעזרת Boost, Rasterbar-libtorrent, OpenSSL ו- wxWidgets.",
     "proxy_hostnames": "שמות מארח פרוקסי",
     "proxy_peer_connections": "חיבורי עמיתי פרוקסי",
-    "ip_filter_disabled": "מסנן IP: ❌",
+    "ip_filter_disabled": "מסנן IP: ✗",
     "ip_filter": "מסנן IP",
     "select_ip_filter_file": "בחר קובץ מסנן IP",
     "file_filter_all_files": "כל הקבצים (*.*)|*.*",
-    "ip_filter_enabled": "מסנן IP: ✔️"
+    "ip_filter_enabled": "מסנן IP: ✓"
 }

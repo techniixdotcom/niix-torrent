@@ -41,7 +41,7 @@
     "about_niixtorrent": "Tietoja NiiX Torrentista",
     "build_info_format": "Haara: {0}\nSHA1: {1}",
     "niixtorrent_description": "Tehty rakkaudella käyttäen Boostia, Rasterbar-libtorrenttia ja OpenSSL:ää.",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">Näytä GitHubissa</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">Näytä GitHubissa</a>",
     "downloads": "Lataukset",
     "transfers": "Siirrot",
     "path": "Polku",

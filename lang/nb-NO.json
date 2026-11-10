@@ -36,7 +36,7 @@
     "storage": "Lagring",
     "about_niixtorrent": "Om NiiX Torrent",
     "niixtorrent_v_format": "NiiX Torrent v{0}",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent på GitHub</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent på GitHub</a>",
     "downloads": "Nedlastinger",
     "transfers": "Overføringer",
     "path": "Plassering",
@@ -300,8 +300,8 @@
     "ip_filter": "IP-filter",
     "select_ip_filter_file": "Velg IP-filterfil",
     "file_filter_all_files": "Alle filer (*.*)|*.*",
-    "ip_filter_enabled": "IP-filter: ✔️",
-    "ip_filter_disabled": "IP-filter: ❌",
+    "ip_filter_enabled": "IP-filter: ✓",
+    "ip_filter_disabled": "IP-filter: ✗",
     "leeches": "Hentere",
     "all_torrents_already_in_session": "Hopper over alle torrentene, siden de er lagt til allerede"
 }

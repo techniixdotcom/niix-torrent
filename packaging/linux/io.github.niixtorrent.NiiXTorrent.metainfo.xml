@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.niixtorrent.NiiXTorrent</id>
+  <name>NiiX Torrent</name>
+  <summary>Fast, lightweight BitTorrent client</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="io.github.niixtorrent">
+    <name>techniix</name>
+  </developer>
+  <description>
+    <p>
+      NiiX Torrent is a small, fast BitTorrent client built on libtorrent. It
+      keeps out of your way: a clean torrent list, the details you need, and
+      nothing else.
+    </p>
+    <ul>
+      <li>BitTorrent v1, v2 (BEP 52) and hybrid torrents, magnet links</li>
+      <li>DHT, peer exchange, local peer discovery, UPnP and NAT-PMP</li>
+      <li>Labels, per-file priorities, sequential download, IP filters</li>
+      <li>A query language to filter large torrent lists</li>
+      <li>Create your own torrents</li>
+      <li>Dark and light themes that follow your desktop</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.niixtorrent.NiiXTorrent.desktop</launchable>
+  <url type="homepage">https://torrent.niiix.net</url>
+  <url type="bugtracker">https://github.com/techniixdotcom/niix-torrent/issues</url>
+  <url type="vcs-browser">https://github.com/techniixdotcom/niix-torrent</url>
+  <categories>
+    <category>Network</category>
+    <category>FileTransfer</category>
+    <category>P2P</category>
+  </categories>
+  <provides>
+    <binary>niixtorrent</binary>
+    <mediatype>application/x-bittorrent</mediatype>
+    <mediatype>x-scheme-handler/magnet</mediatype>
+  </provides>
+  <branding>
+    <color type="primary" scheme_preference="light">#b8f5dc</color>
+    <color type="primary" scheme_preference="dark">#0d1117</color>
+  </branding>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <requires>
+    <display_length compare="ge">520</display_length>
+  </requires>
+  <content_rating type="oars-1.1"/>
+  <screenshots>
+    <screenshot type="default">
+      <caption>The torrent list with the details pane</caption>
+      <image type="source">https://raw.githubusercontent.com/techniixdotcom/niix-torrent/main/res/screenshot-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>The light theme</caption>
+      <image type="source">https://raw.githubusercontent.com/techniixdotcom/niix-torrent/main/res/screenshot-light.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="2.0.0" date="2026-11-10">
+      <description>
+        <p>First release for Linux.</p>
+        <ul>
+          <li>Linux version, packaged as a Flatpak</li>
+          <li>Light theme and an option to follow the system appearance</li>
+          <li>Refreshed interface: new progress bars, piece map, spacing and dialogs</li>
+          <li>Updated to libtorrent 2.1, wxWidgets 3.3.4 and current versions of all other libraries</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

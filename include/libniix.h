@@ -1,7 +1,17 @@
 #ifndef LIBNIIX_H
 #define LIBNIIX_H
 
+#include <stddef.h>
 #include <stdint.h>
+#include <wchar.h>
+
+#if defined(_WIN32)
+#define LIBNIIX_EXPORT __declspec(dllexport)
+#define LIBNIIX_IMPORT __declspec(dllimport)
+#else
+#define LIBNIIX_EXPORT __attribute__((visibility("default")))
+#define LIBNIIX_IMPORT
+#endif
 
 #define LIBNIIX_API_VERSION 1
 #define LIBNIIX_INIT libniix_init
@@ -9,17 +19,17 @@
 #define LIBNIIX_TOSTRING(x) LIBNIIX_STRINGIFY(x)
 
 #define LIBNIIX_DEFINE_PLUGIN(name,version,init_func) \
-    extern "C" __declspec(dllexport) libniix_result_t LIBNIIX_INIT(int v, libniix_plugin_t* a) \
+    extern "C" LIBNIIX_EXPORT libniix_result_t LIBNIIX_INIT(int v, libniix_plugin_t* a) \
     { \
         return init_func(v,a); \
     }
 
 #if defined(LIBNIIX_API_EXPORT)
 #define LIBNIIX_API_FUNCTION \
-    extern "C" __declspec(dllexport)
+    extern "C" LIBNIIX_EXPORT
 #else
 #define LIBNIIX_API_FUNCTION \
-    extern "C" __declspec(dllimport)
+    extern "C" LIBNIIX_IMPORT
 #endif
 
 typedef struct libniix_config_t libniix_config_t;

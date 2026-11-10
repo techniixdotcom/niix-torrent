@@ -40,7 +40,7 @@
     "about_niixtorrent": "Sobre NiiX Torrent",
     "niixtorrent_v_format": "NiiX Torrent v{0}",
     "build_info_format": "Branch: {0}\nSHA1: {1}",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent no GitHub</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent no GitHub</a>",
     "downloads": "Downloads",
     "transfers": "Transferências",
     "path": "Caminho",

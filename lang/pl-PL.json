@@ -40,7 +40,7 @@
     "about_niixtorrent": "O NiiX Torrent",
     "build_info_format": "Gałąź: {0}\nSHA1: {1}",
     "niixtorrent_description": "Wykonane za pomocą Boost, Rasterbar-libtorrent, OpenSSL i wxWidgets. i 💗",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent na GitHubie</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent na GitHubie</a>",
     "downloads": "Pobrane",
     "transfers": "Transfery",
     "path": "Ścieżka",
@@ -289,8 +289,8 @@
     "seed_mode": "Tryb wysyłania",
     "select_ip_filter_file": "Wybierz plik filtra IP",
     "file_filter_all_files": "Wszystkie pliki (*.*)|*.*",
-    "ip_filter_enabled": "Filtr IP: ✔️",
-    "ip_filter_disabled": "Filtr IP: ❌",
+    "ip_filter_enabled": "Filtr IP: ✓",
+    "ip_filter_disabled": "Filtr IP: ✗",
     "dht_num_nodes": "DHT: {0} węzły",
     "commitish": "Commitish"
 }

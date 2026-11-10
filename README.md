@@ -1,19 +1,41 @@
 # NiiX Torrent
 
-**Version 1.0 — maintained by: cuteLiLi / techniix / QuacK.**
+**Version 2.0 — maintained by: cuteLiLi / techniix / QuacK / decoi**
 
-A fast, lightweight, dark-themed BitTorrent client for Windows, built in modern
+A fast, lightweight BitTorrent client for Windows and Linux, built in modern
 C++ on top of Rasterbar-libtorrent.
 
 NiiX Torrent is a fork of [PicoTorrent](https://github.com/picotorrent/picotorrent),
-which is no longer being developed. I will continued and maintain under the new
-name **NiiX Torrent**, rebuilt against the latest versions of every dependency and 
+which is no longer being developed. I will continue and maintain it under the new
+name **NiiX Torrent**, rebuilt against the latest versions of every dependency and
 carrying the NiiX brand palette throughout the UI.
 
 - BitTorrent v2 (BEP-52), v1, and hybrid torrents
 - DHT, PeX, LSD, UPnP
-- Permanent dark theme with the NiiX accent colours (no light theme)
+- Dark and light themes with the NiiX accent colours (follows the system by default)
+- Windows installer and uninstaller, and a Flatpak for Linux
 - Peer-ID prefix `-NX-`, user agent `NiiXTorrent/x.y.z`
+
+## Install
+
+- **Windows 10 / 11:** run `NiiXTorrent-<version>-x64-setup.exe`
+- **Linux:** `flatpak install NiiXTorrent-<version>.flatpak`
+
+## Build
+
+Run the build script and pick what you want - it downloads and installs
+everything it needs:
+
+- **Windows:** double-click `build.cmd`
+- **Linux:** `./build.sh`
+
+```
+  1) Build the installer / Flatpak   -> dist/
+  2) Upload the source code to GitHub
+```
+
+Built with libtorrent 2.1.2, wxWidgets 3.3.4, Boost 1.92, fmt 12.2,
+nlohmann/json 3.12, OpenSSL 3.6, SQLite and ANTLR 4.13.2.
 
 
 

@@ -37,7 +37,7 @@
     "storage": "Almacenamiento",
     "about_niixtorrent": "Acerca de NiiX Torrent",
     "niixtorrent_description": "Construido con amor, usando Boost, Rasterbar-libtorrent, OpenSSL y wxWidgets.",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent en GitHub</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent en GitHub</a>",
     "downloads": "Descargas",
     "transfers": "Transferencias",
     "path": "Ruta",
@@ -301,7 +301,7 @@
     "seed_mode": "Modo semilla",
     "file_filter_all_files": "Todos los archivos (*.*)|*.*",
     "ip_filter": "Filtro de IP",
-    "ip_filter_disabled": "Filtro de IP: ❌",
-    "ip_filter_enabled": "Filtro de IP: ✔️",
+    "ip_filter_disabled": "Filtro de IP: ✗",
+    "ip_filter_enabled": "Filtro de IP: ✓",
     "select_ip_filter_file": "Seleccionar archivo de filtro de IP"
 }

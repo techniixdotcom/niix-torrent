@@ -39,7 +39,7 @@
     "about_niixtorrent": "NiiX Torrent-ის შესახებ",
     "build_info_format": "შტო: {0}\nSHA1: {1}",
     "niixtorrent_description": "შექმნილი სიყვარულით, Boost, Rasterbar-libtorrent და OpenSSL-ს გამოყენებით.",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent GitHub-ზე</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent GitHub-ზე</a>",
     "downloads": "ჩამოტვირთვები",
     "transfers": "ტრანსფერები",
     "path": "ბილიკი",

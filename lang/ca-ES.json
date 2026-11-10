@@ -37,7 +37,7 @@
     "about_niixtorrent": "Sobre NiiX Torrent",
     "build_info_format": "Branca: {0}\nSHA1: {1}",
     "niixtorrent_description": "Creat amb amor, fent servir Boost, Rasterbar-libtorrent i OpenSSL.",
-    "github_link": "<a href=\"https://github.com/niixtorrent/niixtorrent\">NiiX Torrent a GitHub</a>",
+    "github_link": "<a href=\"https://github.com/techniixdotcom/niix-torrent\">NiiX Torrent a GitHub</a>",
     "downloads": "Descarregues",
     "transfers": "Transferències",
     "path": "Ruta",

@@ -221,7 +221,7 @@
     "private": "私有",
     "label": "标签",
     "restart_niixtorrent": "重启 NiiX Torrent",
-    "ip_filter_disabled": "IP过滤器：❌",
+    "ip_filter_disabled": "IP过滤器：✗",
     "copyright_text": "© 2026 techniix",
     "exported_magnet_link_s": "导出磁力链接",
     "torrent_file_s": "种子文件",
@@ -273,6 +273,6 @@
     "connections": "连接",
     "seed_mode": "做种模式",
     "select_ip_filter_file": "选择IP过滤器配置文件",
-    "ip_filter_enabled": "IP过滤器：✔️",
+    "ip_filter_enabled": "IP过滤器：✓",
     "file_filter_all_files": "所有文件 (*.*)|*.*"
 }

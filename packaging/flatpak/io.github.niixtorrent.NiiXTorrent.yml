@@ -1,0 +1,151 @@
+# NiiX Torrent - Flatpak manifest.
+#
+# Build and install for the current user:
+#
+#   flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+#   flatpak-builder --user --install --force-clean --install-deps-from=flathub \
+#       build-flatpak packaging/flatpak/io.github.niixtorrent.NiiXTorrent.yml
+#   flatpak run io.github.niixtorrent.NiiXTorrent
+#
+# or simply:  ./build.sh build   (also produces a single-file .flatpak bundle)
+#
+# Uninstall:  flatpak uninstall io.github.niixtorrent.NiiXTorrent
+#             (add --delete-data to also remove settings and the torrent list)
+
+app-id: io.github.niixtorrent.NiiXTorrent
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+command: niixtorrent
+
+finish-args:
+  # BitTorrent needs the network; X11 is the fallback when Wayland is unavailable.
+  - --share=network
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  # Torrents can be saved to - and created from - any folder or drive.
+  - --filesystem=host
+  # Desktop notifications when a torrent finishes.
+  - --talk-name=org.freedesktop.Notifications
+  # "Show in folder".
+  - --talk-name=org.freedesktop.FileManager1
+  # Notification area icon on desktops that provide one.
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /lib/wx
+  - /share/aclocal
+  - /share/bakefile
+  - /share/doc
+  - /share/cmake
+  - /bin/wx-config
+  - /bin/wxrc*
+  - '*.a'
+  - '*.la'
+
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=log,filesystem,thread,system,date_time,atomic,chrono,regex,random
+      - ./b2 -j${FLATPAK_BUILDER_N_JOBS} -d0 variant=release link=static cxxflags=-fPIC cflags=-fPIC install
+    sources:
+      - type: archive
+        url: https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-b2-nodocs.tar.xz
+        sha256: ea7b982002cc9dfbe59b0b217b206f470dc75f3de0bb2973d844118934d82411
+
+  - name: fmt
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -DFMT_TEST=OFF
+      - -DFMT_DOC=OFF
+    sources:
+      - type: git
+        url: https://github.com/fmtlib/fmt.git
+        tag: 12.2.1
+        commit: 208219daff58f2a7438f6931cc2ddc358acf33ef
+
+  - name: nlohmann-json
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DJSON_BuildTests=OFF
+    sources:
+      - type: archive
+        url: https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+        sha256: 42f6e95cad6ec532fd372391373363b62a14af6d771056dbfc86160e6dfff7aa
+
+  - name: libtorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_CXX_STANDARD=20
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -DBUILD_SHARED_LIBS=OFF
+      - -Ddeprecated-functions=OFF
+    sources:
+      - type: archive
+        url: https://github.com/arvidn/libtorrent/releases/download/v2.1.2/libtorrent-rasterbar-2.1.2.tar.gz
+        sha256: 3362546d9cd71b9e49ee6cac7d3f1f914ce9cdb217c86b63d5b22cbed0334dbc
+
+  # Notification area icon (StatusNotifierItem). Without it wxWidgets falls
+  # back to the legacy XEmbed tray, which does not work under Wayland or on
+  # most current desktops. Maintained by Flathub (github.com/flathub/shared-modules).
+  - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
+
+  - name: wxwidgets
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DwxBUILD_SHARED=OFF
+      - -DwxBUILD_TOOLKIT=gtk3
+      - -DwxBUILD_SAMPLES=OFF
+      - -DwxBUILD_TESTS=OFF
+      - -DwxBUILD_DEMOS=OFF
+      - -DwxUSE_WEBVIEW=OFF
+      - -DwxUSE_MEDIACTRL=OFF
+      - -DwxUSE_OPENGL=OFF
+      - -DwxUSE_STC=OFF
+      - -DwxUSE_RICHTEXT=OFF
+      - -DwxUSE_RIBBON=OFF
+      - -DwxUSE_APPINDICATOR=ON
+    sources:
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.4/wxWidgets-3.3.4.tar.bz2
+        sha256: 815c16cafa4fcbfcf25c5c0a3418309c62257b8a3b6f91d85a1367a134f98c98
+
+  - name: niixtorrent
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DNIIX_USE_VCPKG=OFF
+    sources:
+      # The working tree this manifest lives in. For Flathub, replace with a
+      # git source pointing at a release tag.
+      - type: dir
+        path: ../..
+        skip:
+          - build
+          - build-linux
+          - build-flatpak
+          - build-x64
+          - build-x86
+          - dist
+          - vendor
+          - .flatpak-builder
+      # ANTLR 4.13.2 C++ runtime for the filter language (src/pql).
+      - type: git
+        url: https://github.com/antlr/antlr4.git
+        tag: 4.13.2
+        commit: cc82115a4e7f53d71d9d905caa2c2dfa4da58899
+        dest: vendor/antlr4
