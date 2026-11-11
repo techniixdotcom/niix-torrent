@@ -13,7 +13,7 @@ using pt::UI::StatusBar;
 using pt::UI::Theme;
 
 StatusBar::StatusBar(wxWindow* parent)
-    : wxStatusBarGeneric(parent, wxID_ANY, wxSTB_SHOW_TIPS | wxSTB_ELLIPSIZE_END | wxFULL_REPAINT_ON_RESIZE)
+    : wxStatusBar(parent, wxID_ANY, wxSTB_SHOW_TIPS | wxSTB_ELLIPSIZE_END | wxFULL_REPAINT_ON_RESIZE)
 {
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     SetBackgroundColour(Theme::Background());

@@ -27,6 +27,10 @@ MESSAGE="${1:-NiiX Torrent $VERSION}"
 
 cd "$ROOT"
 
+# Never hand output to a pager (less may not be installed, and the script
+# should not stop to wait for a key press).
+export GIT_PAGER=cat PAGER=cat
+
 if ! command -v git >/dev/null 2>&1; then
     # shellcheck source=scripts/prereqs.sh
     source "$ROOT/scripts/prereqs.sh"

@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
     Uploads the source code to GitHub.
@@ -41,6 +41,9 @@ $Version = (Get-Content (Join-Path $Root "VERSION") -TotalCount 1).Trim()
 if (-not $Message) { $Message = "NiiX Torrent $Version" }
 
 Set-Location $Root
+
+# Never hand output to a pager; the script should not stop for a key press.
+$env:GIT_PAGER = 'cat'
 
 function Invoke-Git {
     # Runs git and stops the script when it fails.

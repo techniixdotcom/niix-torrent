@@ -5,7 +5,7 @@
 #include <wx/wx.h>
 #endif
 
-#include <wx/generic/statusbr.h>
+#include <wx/statusbr.h>
 
 #include <memory>
 
@@ -15,7 +15,7 @@ namespace UI
 {
     // Owner-drawn on every platform (the native Windows status bar ignores
     // the dark theme): muted text in fixed fields with hairline separators.
-    class StatusBar : public wxStatusBarGeneric
+    class StatusBar : public wxStatusBar
     {
     public:
         StatusBar(wxWindow* parent);

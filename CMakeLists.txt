@@ -91,6 +91,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/vendor/wx/CMakeLists.txt")
     set(wxUSE_RICHTEXT        OFF   CACHE BOOL   "" FORCE)
     set(wxUSE_RIBBON          OFF   CACHE BOOL   "" FORCE)
     set(wxUSE_OPENGL          OFF   CACHE BOOL   "" FORCE)
+    # The status bar draws itself (theme colours), so on Windows use the
+    # generic wxStatusBar instead of the native control.
+    set(wxUSE_NATIVE_STATUSBAR OFF  CACHE BOOL   "" FORCE)
     add_subdirectory(vendor/wx EXCLUDE_FROM_ALL)
     set(NIIX_WX_LIBS wx::core wx::base wx::propgrid wx::net)
     message(STATUS "NiiX: using vendored wxWidgets (vendor/wx)")
